@@ -31,11 +31,7 @@ function playGame() {
             computerScore++;
         }
 
-        console.log(`
-Scores at the end of Round ${i+1}\n
-You: ${humanScore}\n
-Computer: ${computerScore}
-        `);
+        console.log(`Scores at the end of Round ${i+1}\n You: ${humanScore}\n Computer: ${computerScore}`);
     }
 
     if (humanScore > computerScore) {
@@ -70,16 +66,16 @@ Computer: ${computerScore}
                 console.log("Nobody wins! Equally matched!");
                 break;
             case "humanWin":
-                console.log(`You win! ${getCapitalizedWord(humanChoice)} beats ${getCapitalizedWord(computerChoice)}.`);
+                console.log(`You win! ${capitalizeWord(humanChoice)} beats ${capitalizeWord(computerChoice)}.`);
                 break;
             case "computerWin":
-                console.log(`You lose! ${getCapitalizedWord(computerChoice)} beats ${getCapitalizedWord(humanChoice)}.`)
+                console.log(`You lose! ${capitalizeWord(computerChoice)} beats ${capitalizeWord(humanChoice)}.`)
         }
 
         return result;
     }
     
-    function getCapitalizedWord(word) {
+    function capitalizeWord(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
     }
 }
