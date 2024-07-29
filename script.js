@@ -15,45 +15,73 @@ function getHumanChoice() {
     return prompt("Enter your choice:").toLowerCase();
 }
 
-let humanScore = 0;
-let computerScore = 0;
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
 
-function playRound(humanChoice, computerChoice) {
-    let result = null;
+    for (let i = 0; i < 5; i++) {
+        let humanSelection = getHumanChoice();
+        let computerSelection = getComputerChoice();
+
+        let result = playRound(humanSelection, computerSelection);
+
+        if (result === "humanWin") {
+            humanScore++;
+        } else if (result === "computerWin") {
+            computerScore++;
+        }
+
+        console.log(`
+Scores at the end of Round ${i+1}\n
+You: ${humanScore}\n
+Computer: ${computerScore}
+        `);
+    }
+
+    if (humanScore > computerScore) {
+        console.log("Congratulations! You bested the machine.");
+    } else if (humanScore < computerScore) {
+        console.log("Sorry! The machine has utterly humiliated you.");
+    } else {
+        console.log("Evenly matched! A rematch will have to occur another day.");
+    }
     
-    if (humanChoice === computerChoice) {
-        result = "tie";
-    } else if (
-        (humanChoice === "paper" && computerChoice === "rock") ||
-        (humanChoice === "scissors" && computerChoice === "paper") ||
-        (humanChoice === "rock" && computerChoice === "scissors")
-    ) {
-        result = "humanWin";
-    } else if (
-        (humanChoice === "scissors" && computerChoice === "rock") ||
-        (humanChoice === "rock" && computerChoice === "paper") ||
-        (humanChoice === "paper" && computerChoice === "scissors")
-    ) {
-        result = "computerWin";
-    }
+    function playRound(humanChoice, computerChoice) {
+        let result = null;
+        
+        if (humanChoice === computerChoice) {
+            result = "tie";
+        } else if (
+            (humanChoice === "paper" && computerChoice === "rock") ||
+            (humanChoice === "scissors" && computerChoice === "paper") ||
+            (humanChoice === "rock" && computerChoice === "scissors")
+        ) {
+            result = "humanWin";
+        } else if (
+            (humanChoice === "scissors" && computerChoice === "rock") ||
+            (humanChoice === "rock" && computerChoice === "paper") ||
+            (humanChoice === "paper" && computerChoice === "scissors")
+        ) {
+            result = "computerWin";
+        }
+    
+        switch (result) {
+            case "tie":
+                console.log("Nobody wins! Equally matched!");
+                break;
+            case "humanWin":
+                console.log(`You win! ${getCapitalizedWord(humanChoice)} beats ${getCapitalizedWord(computerChoice)}.`);
+                break;
+            case "computerWin":
+                console.log(`You lose! ${getCapitalizedWord(computerChoice)} beats ${getCapitalizedWord(humanChoice)}.`)
+        }
 
-    switch (result) {
-        case "tie":
-            console.log("Nobody wins! Equally matched!");
-            break;
-        case "humanWin":
-            console.log(`You win! ${getCapitalizedWord(humanChoice)} beats ${getCapitalizedWord(computerChoice)}.`);
-            break;
-        case "computerWin":
-            console.log(`You lose! ${getCapitalizedWord(computerChoice)} beats ${getCapitalizedWord(humanChoice)}.`)
+        return result;
+    }
+    
+    function getCapitalizedWord(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
     }
 }
 
-function getCapitalizedWord(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-}
-
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
+playGame();
