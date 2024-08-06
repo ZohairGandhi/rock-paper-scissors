@@ -19,20 +19,18 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
-    for (let i = 0; i < 5; i++) {
-        let humanSelection = getHumanChoice();
-        let computerSelection = getComputerChoice();
+    let humanSelection = getHumanChoice();
+    let computerSelection = getComputerChoice();
 
-        let result = playRound(humanSelection, computerSelection);
+    let result = playRound(humanSelection, computerSelection);
 
-        if (result === "humanWin") {
-            humanScore++;
-        } else if (result === "computerWin") {
-            computerScore++;
-        }
-
-        console.log(`Scores at the end of Round ${i+1}\n You: ${humanScore}\n Computer: ${computerScore}`);
+    if (result === "humanWin") {
+        humanScore++;
+    } else if (result === "computerWin") {
+        computerScore++;
     }
+
+    console.log(`Scores at the end of Round ${i+1}\n You: ${humanScore}\n Computer: ${computerScore}`);
 
     if (humanScore > computerScore) {
         console.log("Congratulations! You bested the machine.");
