@@ -13,6 +13,9 @@ scissorsBtn.addEventListener("click", () => handleClick("scissors"));
 let roundResult = document.querySelector(".roundResult");
 let roundResultText = document.createElement("p");
 
+let humanScorePara = document.querySelector("#humanScore");
+let computerScorePara = document.querySelector("#computerScore");
+
 function handleClick(buttonClicked) {
     playRound(buttonClicked, getComputerChoice());
 }
@@ -37,14 +40,12 @@ function getHumanChoice() {
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         roundResultText.textContent = "Nobody wins! Equally matched!";
-        // console.log("Nobody wins! Equally matched!");
     } else if (
         (humanChoice === "paper" && computerChoice === "rock") ||
         (humanChoice === "scissors" && computerChoice === "paper") ||
         (humanChoice === "rock" && computerChoice === "scissors")
     ) {
         roundResultText.textContent = `You win! ${capitalizeWord(humanChoice)} beats ${capitalizeWord(computerChoice)}.`;
-        // console.log(`You win! ${capitalizeWord(humanChoice)} beats ${capitalizeWord(computerChoice)}.`);
         humanScore++;
     } else if (
         (humanChoice === "scissors" && computerChoice === "rock") ||
@@ -52,15 +53,13 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice === "paper" && computerChoice === "scissors")
     ) {
         roundResultText.textContent = `You lose! ${capitalizeWord(computerChoice)} beats ${capitalizeWord(humanChoice)}.`;
-        // console.log(`You lose! ${capitalizeWord(computerChoice)} beats ${capitalizeWord(humanChoice)}.`);
         computerScore++;
     }
 
     roundResult.appendChild(roundResultText);
 
-    console.log(`Scores at the end of Round ${roundNum}:
-        You: ${humanScore}
-        Computer: ${computerScore}`);
+    humanScorePara.textContent = `You: ${humanScore}`;
+    computerScorePara.textContent = `Computer: ${computerScore}`;
 
     roundNum++;
 
