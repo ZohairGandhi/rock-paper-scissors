@@ -38,6 +38,11 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+    if (isGameOver()) {
+        displayGameWinner();
+        return;
+    }
+
     if (humanChoice === computerChoice) {
         roundResultText.textContent = "Nobody wins! Equally matched!";
     } else if (
@@ -61,9 +66,26 @@ function playRound(humanChoice, computerChoice) {
     humanScorePara.textContent = `You: ${humanScore}`;
     computerScorePara.textContent = `Computer: ${computerScore}`;
 
+    if (isGameOver()) {
+        displayGameWinner();
+        return;
+    }
+
     roundNum++;
 
     function capitalizeWord(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+}
+
+function isGameOver() {
+    return humanScore === 5 || computerScore === 5;
+}
+
+function displayGameWinner() {
+    if (humanScore === 5) {
+        alert("Congratulations, you bested the machine!");
+    } else {
+        alert("Sorry, the machine has utterly humiliated you!");
     }
 }
