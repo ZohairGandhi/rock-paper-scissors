@@ -10,6 +10,9 @@ rockBtn.addEventListener("click", () => handleClick("rock"));
 paperBtn.addEventListener("click", () => handleClick("paper"));
 scissorsBtn.addEventListener("click", () => handleClick("scissors"));
 
+let roundResult = document.querySelector(".roundResult");
+let roundResultText = document.createElement("p");
+
 function handleClick(buttonClicked) {
     playRound(buttonClicked, getComputerChoice());
 }
@@ -33,22 +36,27 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        console.log("Nobody wins! Equally matched!");
+        roundResultText.textContent = "Nobody wins! Equally matched!";
+        // console.log("Nobody wins! Equally matched!");
     } else if (
         (humanChoice === "paper" && computerChoice === "rock") ||
         (humanChoice === "scissors" && computerChoice === "paper") ||
         (humanChoice === "rock" && computerChoice === "scissors")
     ) {
-        console.log(`You win! ${capitalizeWord(humanChoice)} beats ${capitalizeWord(computerChoice)}.`);
+        roundResultText.textContent = `You win! ${capitalizeWord(humanChoice)} beats ${capitalizeWord(computerChoice)}.`;
+        // console.log(`You win! ${capitalizeWord(humanChoice)} beats ${capitalizeWord(computerChoice)}.`);
         humanScore++;
     } else if (
         (humanChoice === "scissors" && computerChoice === "rock") ||
         (humanChoice === "rock" && computerChoice === "paper") ||
         (humanChoice === "paper" && computerChoice === "scissors")
     ) {
-        console.log(`You lose! ${capitalizeWord(computerChoice)} beats ${capitalizeWord(humanChoice)}.`);
+        roundResultText.textContent = `You lose! ${capitalizeWord(computerChoice)} beats ${capitalizeWord(humanChoice)}.`;
+        // console.log(`You lose! ${capitalizeWord(computerChoice)} beats ${capitalizeWord(humanChoice)}.`);
         computerScore++;
     }
+
+    roundResult.appendChild(roundResultText);
 
     console.log(`Scores at the end of Round ${roundNum}:
         You: ${humanScore}
